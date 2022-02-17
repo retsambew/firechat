@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 
 import authRoute from './routes/auth.js';
 import profileRoute from './routes/profile.js';
+import requestRoute from './routes/request.js';
 
 const app = express();
 app.set('view engine','hbs');
@@ -15,5 +16,6 @@ app.get("/", (req,res) => {
 
 app.use('/',authRoute);
 app.use('/profile',profileRoute)
+app.use('/request',requestRoute)
 
 app.listen(5000, () => console.log('server running on port 5000.'))

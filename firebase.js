@@ -18,4 +18,5 @@ export let currentUser;
 export const changeUser = (user) => currentUser=user;
 
 export const Users = collection(db,'users');
+export const msgDB = collection(db,'messageDB');
 //const friends = collection(db,`users/${currentUser.id}/friends`);

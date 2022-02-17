@@ -1,5 +1,5 @@
 import { changeUser, currentUser, Users } from "../firebase.js";
-import { deleteDoc, doc, getDocs } from "firebase/firestore";
+import { deleteDoc, getDocs, updateDoc, arrayUnion } from "firebase/firestore";
 
 export const profile = (req,res) => {
     if(currentUser!=null){
@@ -13,17 +13,31 @@ export const profile = (req,res) => {
         res.send({msg:"Please login to view profile."})
 }
 
-export const sendRequest = async(req,res)=>{
-    res.send({msg:"Under Development."})
-}
-
 export const getUser = async(req,res) =>{
-    res.send({msg:"Under Development."})
+    if(currentUser!=null){
+        const data=req.body;
+        const Userlist = await getDocs(Users);
+        var flag=true;
+        Userlist.forEach(user => {
+            if(user.get('uid')==data.uid){
+                console.log('id:',user.get('uid'));
+                console.log('name:',user.get('name'));
+                flag=false;
+            }
+        });
+        if(flag)
+            res.send({msg:'No such user found!'});
+        else{
+            res.send({msg:'User Displayed on Console!'});
+        }
+    }
+    else
+        res.send({msg:"you're not logged in!" })    
 }
 
 export const deleteUser = async(req,res) => {
     if(currentUser!=null){
-        await deleteDoc(doc(Users, currentUser.id));
+        await deleteDoc(currentUser.ref);
         changeUser(null);
         res.send({msg:'user deleted! Thanks for being with us.'})
     }

@@ -1,5 +1,5 @@
 import express from "express";
-import {deleteUser,profile,sendRequest,getUser} from '../controllers/profile.js'
+import {deleteUser,profile,getUser} from '../controllers/profile.js'
 
 const router= express.Router();
 
@@ -7,7 +7,5 @@ const router= express.Router();
 router.get('/',profile);
 router.post('/',getUser); // takes uid through body.
 router.delete('/',deleteUser);
-router.get('/:uid',getUser);
-router.post('/:uid',sendRequest);
 
 export default router;

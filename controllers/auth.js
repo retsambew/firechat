@@ -1,5 +1,5 @@
 import { addDoc, getDocs, getDoc, doc } from "firebase/firestore";
-import { Users, currentUser, changeUser } from '../firebase.js';
+import { Users, changeUser } from '../firebase.js';
 
 export const login = async(req,res)=>{
     const {uid,pass}=req.body;
